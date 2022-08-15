@@ -13,9 +13,47 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+'''
+from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #drf
+    path('api-auth/', include('rest_framework.urls')),
 ]
+'''
+from django.urls import path, include
+from django.contrib.auth.models import User
+from rest_framework import routers, serializers, viewsets
+from django.contrib import admin
+
+# USER TABLE에 대한 CRUD 기능을 제공하는 코드 
+# Serializers define the API representation.
+#class UserSerializer(serializers.HyperlinkedModelSerializer):
+#    class Meta:
+#        model = User
+#        fields = ['url', 'username', 'email', 'is_staff']
+
+# ViewSets define the view behavior.
+#class UserViewSet(viewsets.ModelViewSet):
+#    queryset = User.objects.all()
+#    serializer_class = UserSerializer
+
+# Routers provide an easy way of automatically determining the URL conf.
+#router = routers.DefaultRouter()
+#router.register(r'users', UserViewSet)
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
+    #admin 사이트 연결
+    path('admin/', admin.site.urls),
+
+    path('doeco_app/', include('doeco_app.urls')),
+    #path('', include(router.urls)),
+    #화면에 로그인 기능을 보여주는 역할 (Log in)
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
+
