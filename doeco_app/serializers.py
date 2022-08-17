@@ -10,25 +10,13 @@ class UserListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ['url', 'username', 'email', 'is_staff']
-'''
-class PostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        #client에 보내줄 필드 
-        #fields = ['user', 'id', 'title', 'content','image','like', 'category']
-        fields = '__all__'
 
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = '__all__'
-'''
 class PostListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         #client에 보내줄 필드 
         #fields = ['post_writer', 'title', 'create_dt','region']
-        fields = ['post_writer', 'title', 'create_dt','like']
+        fields = ['pk', 'post_writer', 'title', 'create_dt','like']
         #fields = '__all__'
 
 class PostRetrieveSerializer(serializers.ModelSerializer):
@@ -42,10 +30,9 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
-        
-'''
-class PostLikeSerializer(serializers.ModelSerializer):
+        #fields = ['pk','comment_writer', 'create_dt', 'content', 'like','post']
+
+class CommentLikeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Post
+        model = Comment
         fields = ['like']
-'''

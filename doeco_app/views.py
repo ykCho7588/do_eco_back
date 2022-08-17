@@ -1,77 +1,88 @@
-'''
-from django.shortcuts import render
-from rest_framework import viewsets
+from calendar import c
 from django.contrib.auth.models import User
-
-from doeco_app.serializers import UserSerializer, PostSerializer, CommentSerializer
-from doeco_app.models import Post, Comment
-#Create your views here.
-
-#ModelViewSet 상속 받음
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all() #대상 table: User
-    serializer_class = UserSerializer
-
-class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all() #대상 table: Post
-    serializer_class = PostSerializer
-
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objects.all() #대상 table: Comment
-    serializer_class = CommentSerializer
-'''
-from django.contrib.auth.models import User
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, GenericAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, GenericAPIView, DestroyAPIView
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from django.db.models import OuterRef
 
 from doeco_app.serializers import PostListSerializer, CommentSerializer, PostRetrieveSerializer, UserListSerializer
 from doeco_app.models import Post, Comment
+#from doecoproject.doeco_app import serializers
 
 class UserListAPIView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserListSerializer
 
-class PostListAPIView(ListAPIView):
+#POST
+class PostListAPIView(ListAPIView): #게시물 보기(GET)
     queryset = Post.objects.all() #대상 table: Post
     serializer_class = PostListSerializer
 
-class PostRetrieveAPIView(RetrieveAPIView):
+class PostRetrieveAPIView(RetrieveAPIView): #게시물 detail(GET)
     queryset = Post.objects.all() #대상 table: Post
     serializer_class = PostRetrieveSerializer
 
-class PostCreateAPIView(CreateAPIView):
+class PostCreateAPIView(CreateAPIView): # 게시물 create(POST)
     queryset = Post.objects.all() #대상 table: Post
     serializer_class = PostRetrieveSerializer
 
+class PostDeleteAPIView(DestroyAPIView): #게시물 삭제 (DELETE)
+    queryset = Post.objects.all()
+    serializer_class = PostRetrieveSerializer
+
+class PostUpdateAPIView(UpdateAPIView): #게시물 update(PUT)
+    queryset = Post.objects.all()
+    serializer_class = PostRetrieveSerializer
+
+#COMMENT
 class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all() #대상 table: Comment
     serializer_class = CommentSerializer
 
-class PostCommentRetrieveAPIView(RetrieveAPIView):
+class CommentDeleteAPIView(DestroyAPIView):
+    queryset = Comment.objects.all() #대상 table: Comment
+    serializer_class = CommentSerializer
+
+class CommentUpdateAPIView(UpdateAPIView):
+    queryset = Comment.objects.all() #대상 table: Comment
+    serializer_class = CommentSerializer
+
+#POST COMMENT => 수정 필요
+class PostCommentListAPIView(ListAPIView):
     queryset = Post.objects.all()
     serializer_class = CommentSerializer
-    
-'''
-class PostLikeAPIView(UpdateAPIView):
-    queryset = Post.objects.all() #대상 table: Comment
-    serializer_class = PostLikeSerializer
-    # PATCH method
-    #like 갯수를 증가시키고 update하는 코드 
-    def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
-        instance = self.get_object()
-        data = {'like': instance.like + 1}
-        serializer = self.get_serializer(instance, data=data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
 
-        if getattr(instance, '_prefetched_objects_cache', None):
-            # If 'prefetch_related' has been applied to a queryset, we need to
-            # forcibly invalidate the prefetch cache on the instance.
-            instance._prefetched_objects_cache = {}
-        #like 숫자로 보내기
-        return Response(data['like'])
-'''
+    def get_queryset(pk):
+        #comment = get_object_or_404(Comment, post=pk)
+        comment = Comment.objects.filter(post=pk)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+
+class CommentRetrieveAPIView(ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = CommentSerializer
+
+    def get(self, request, pk, format=None):
+        comment = get_object_or_404(Comment, id=pk)
+        #comment = Comment.objects.filter(post = pk)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+
+    '''
+    queryset = Post.objects.all()
+    serializer_class = CommentSerializer
+
+    def get_queryset(pk):
+        comments = Comment.objects.filter(id= pk)
+        serializer = CommentSerializer(comments)
+        return Response(serializer.data)
+    ###
+     def get(self, request, pk, format=None):
+        #comment = get_object_or_404(Comment, post=pk)
+        comment = Comment.objects.filter(post = pk)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data)
+        '''
 class PostLikeAPIView(GenericAPIView):
     queryset = Post.objects.all() #대상 table: Comment
 
