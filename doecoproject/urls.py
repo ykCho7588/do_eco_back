@@ -13,11 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.contrib import admin
 from django.urls import path
 from doeco_app import views
+from accounts import accounts_Views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('place/', views.Ecospots)
+    path('place/', views.Ecospots),
+    path('login/', accounts_Views.login, name='login'),
+    path('logout/', accounts_Views.logout, name="logout"),
+
 ]
