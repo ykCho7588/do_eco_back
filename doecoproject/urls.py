@@ -13,9 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from doeco_app import views
+from accounts import views as accounts_views
+
 
 urlpatterns = [
+    path('/', views.main),
     path('admin/', admin.site.urls),
+    path('place/', views.Ecospots),
+    path('login/', accounts_views.login),
+    path('logout/', accounts_views.logout)
+    
+
 ]
