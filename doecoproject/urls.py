@@ -16,15 +16,17 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from doeco_app import views
-from accounts import accounts_Views
+from accounts import views as accounts_views
 
 
 urlpatterns = [
+    path('/', views.main),
     path('admin/', admin.site.urls),
     path('place/', views.Ecospots),
-    path('login/', accounts_Views.login, name='login'),
-    path('logout/', accounts_Views.logout, name="logout"),
+    path('login/', accounts_views.login),
+    path('logout/', accounts_views.logout)
+    
 
 ]

@@ -25,11 +25,12 @@ def login(request):
             auth.login(request,user)
             # home 화면으로 redirect
             # 프론트 코드와 머지하면 바꾸기(홈화면 링크로)
-  
+            return redirect('home')
         else:
-            return render(request, 'login.html')
+            return render(request, 'login.html', {'error' : 'username or password is incorrect'})
 
-
+    else:
+        return render(request, 'login.html')
 def logout(request):
     auth.logout(request)
 
