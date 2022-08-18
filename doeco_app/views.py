@@ -47,16 +47,14 @@ class CommentUpdateAPIView(UpdateAPIView):
     queryset = Comment.objects.all() #대상 table: Comment
     serializer_class = CommentSerializer
 
-#POST COMMENT => 수정 필요
+#POST COMMENT
 class PostCommentListAPIView(ListAPIView):
-    queryset = Post.objects.all()
     serializer_class = CommentSerializer
 
-    def get_queryset(pk):
-        #comment = get_object_or_404(Comment, post=pk)
-        comment = Comment.objects.filter(post=pk)
-        serializer = CommentSerializer(comment)
-        return Response(serializer.data)
+    def get_queryset(self):
+        postId=  self.kwargs.get('pk')
+        comment = Comment.objects.filter(post=postId)
+        return comment
 
 class CommentRetrieveAPIView(ListAPIView):
     queryset = Post.objects.all()
@@ -68,21 +66,6 @@ class CommentRetrieveAPIView(ListAPIView):
         serializer = CommentSerializer(comment)
         return Response(serializer.data)
 
-    '''
-    queryset = Post.objects.all()
-    serializer_class = CommentSerializer
-
-    def get_queryset(pk):
-        comments = Comment.objects.filter(id= pk)
-        serializer = CommentSerializer(comments)
-        return Response(serializer.data)
-    ###
-     def get(self, request, pk, format=None):
-        #comment = get_object_or_404(Comment, post=pk)
-        comment = Comment.objects.filter(post = pk)
-        serializer = CommentSerializer(comment)
-        return Response(serializer.data)
-        '''
 class PostLikeAPIView(GenericAPIView):
     queryset = Post.objects.all() #대상 table: Comment
 
