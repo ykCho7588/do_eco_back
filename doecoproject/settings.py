@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'doeco_app',
-    'accounts'
+    'rest_framework',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,13 @@ LOGIN_REDIRECT_URL ="/"
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#DRF
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
