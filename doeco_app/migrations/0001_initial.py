@@ -4,7 +4,6 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
-
 class Migration(migrations.Migration):
 
     initial = True
@@ -50,4 +49,15 @@ class Migration(migrations.Migration):
                 ('post', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='doeco_app.post')),
             ],
         ),
+        migrations.CreateModel(
+            name='Ecospot',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=15)),
+                ('location', models.CharField(default='', max_length=50)),
+                ('latitude', models.FloatField(default=0.0)),
+                ('longitude', models.FloatField(default=0.0)),
+            ],
+        )
+
     ]

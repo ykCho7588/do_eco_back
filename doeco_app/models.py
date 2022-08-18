@@ -28,14 +28,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
-#class Tag(models.Model):
-#    name = models.CharField(max_length=50)
-#
-#    def __str__(self):
-#        return self.name
-
-
 class Comment(models.Model):
     comment_writer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
@@ -50,3 +42,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.short_content
+
+class Ecospot(models.Model):
+    name=models.CharField(max_length=15)
+    location = models.CharField(max_length=50, default='')
+
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)

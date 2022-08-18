@@ -7,8 +7,21 @@ from django.db.models import OuterRef
 
 from doeco_app.serializers import PostListSerializer, CommentSerializer, PostRetrieveSerializer, UserListSerializer
 from doeco_app.models import Post, Comment
-#from doecoproject.doeco_app import serializers
 
+#seojin code
+from django.shortcuts import render
+import requests
+import json
+from .models import Ecospot
+
+def main(request):
+        return render(request, 'main.html')
+
+def Ecospots(request):
+        ecospots = Ecospot.objects.all
+        return render(request, 'ecospot.html', {'ecospots':ecospots})
+
+#yoonkyeong code
 class UserListAPIView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserListSerializer
