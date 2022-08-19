@@ -1,11 +1,35 @@
 import django
 from django.shortcuts import render, redirect
 from django.contrib import auth
-
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 
 
 # Create your views here.
+##from here
+'''
+def sign_up(request):
+    if request.method == 'GET':
+        return render(request, '/signup.html')
+    elif request.method == 'POST':  # 회원가입 정보 입력 후 가입하기 클릭시
+        username = request.POST.get('username', None)  # 이름
+        password = request.POST.get('password', None)  # 비밀번호
+        password2 = request.POST.get('password2', None)  # 비밀번호 확인
+        #bio = request.POST.get('bio', None)  # 자기소개
+
+        if password != password2:  # 비밀번호와 비밀번호 확인이 같지 않으면
+            return render(request, 'user/signup.html')  # 페이지 다시 로드
+        
+        else:  # 같으면
+            exist_user = get_user_model().objects.filter(username=username)  # 같은 이름의 사용자가 있는지 데이터베이스 조회
+
+            if exist_user:  # 이미 있다면
+                return render(request, 'user/signup.html')  # 페이지 다시 로드
+            else:  # 없다면
+                User.objects.create_user(username=username, password=password)  # 데이터베이스에 이름, 비밀번호, 자기소개를 저장
+                return redirect('/login')  # 로그인 페이지로 이동
+'''
+##to here
 
 
 def login(request):
@@ -28,7 +52,6 @@ def login(request):
             return redirect('home')
         else:
             return render(request, 'login.html', {'error' : 'username or password is incorrect'})
-
     else:
         return render(request, 'login.html')
 def logout(request):
