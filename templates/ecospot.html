@@ -1,57 +1,90 @@
-
-
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-	<meta charset="utf-8"/>
-	<title>DO-GETHER</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>do-gether</title>
+    <link href="{% static 'css/ecospot.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23821fb52606e8e277e52892bfeb6687"></script>
-<div id="map" style="width:100%;height:700px;"></div>
-<p>
-<button onclick="setBounds()">환경단체 보기</button> 
-</p>
+    <header>
+        <div class="nav">
+            <h1 onclick="goMain();">DO-ECO</h1>
+            <div id="button">
+                <a href="{% url 'ecotip' %}">ECO-TIP</a>
+                <a href="{% url 'ecorank' %}">ECO-RANK</a>
+                <a href="{% url 'freehome' %}">DO-ECO</a>
+                <a href="{% url 'ecospot' %}">DO-GETHER</a>
+                <a href="{% url 'zeroshop' %}">Zero Waste</a>
+                <a href="{% url 'mypage' %}">MY PAGE</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="gather-title">
+            <img class="earth" src="{% static 'images/gather-earth.png' %}">
+            <h1>DO-GETHER</h1>
+            <p>함께할수록 즐겁고 보람찬 환경보호, 같이 노력해요!</p>
+        </div>
+    </main>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=23821fb52606e8e277e52892bfeb6687"></script>
+    <div id="map" style="position:absolute; top:280%;width:100%;height:700px;"></div>
+    <p>
+        <button class="view-but" onclick="setBounds()">환경단체 보기</button>
+    </p>
 
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+    <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
- 
-// 버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
-var points = [
-    new kakao.maps.LatLng(37.4620684987, 126.8796783437),
-    new kakao.maps.LatLng(37.4779076957, 126.8631802855),
-    new kakao.maps.LatLng(37.4516018595, 126.8917655193),
-    new kakao.maps.LatLng(37.461466097, 126.8809000548),
-    new kakao.maps.LatLng(37.4587136529, 126.8767112708)
-];
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-var bounds = new kakao.maps.LatLngBounds();    
+        // 버튼을 클릭하면 아래 배열의 좌표들이 모두 보이게 지도 범위를 재설정합니다 
+        var points = [
+            new kakao.maps.LatLng(37.4620684987, 126.8796783437),
+            new kakao.maps.LatLng(37.4779076957, 126.8631802855),
+            new kakao.maps.LatLng(37.4516018595, 126.8917655193),
+            new kakao.maps.LatLng(37.461466097, 126.8809000548),
+            new kakao.maps.LatLng(37.4587136529, 126.8767112708)
+        ];
 
-var i, marker;
-for (i = 0; i < points.length; i++) {
-    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-    marker =     new kakao.maps.Marker({ position : points[i] });
-    marker.setMap(map);
-    
-    // LatLngBounds 객체에 좌표를 추가합니다
-    bounds.extend(points[i]);
-}
+        // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+        var bounds = new kakao.maps.LatLngBounds();
 
-function setBounds() {
-    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
-    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
-    map.setBounds(bounds);
-}
-</script>
+        var i, marker;
+        for (i = 0; i < points.length; i++) {
+            // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
+            marker = new kakao.maps.Marker({ position: points[i] });
+            marker.setMap(map);
 
+            // LatLngBounds 객체에 좌표를 추가합니다
+            bounds.extend(points[i]);
+        }
 
- 
+        function setBounds() {
+            // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+            // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+            map.setBounds(bounds);
+        }
+    </script>
+
+    <script>
+        function goMain() {
+            link = 'main.html';
+            location.href = link;
+        }
+    </script>
 </body>
+
 </html>

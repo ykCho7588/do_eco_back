@@ -1,0 +1,17 @@
+
+{{post_detail.title}}<br>
+{{post_detail.date}}<br>
+{{post_detail.author}}<br>
+{{post_detail.body}}<br>
+
+
+
+{% if post_detail.photo %}
+
+<div>
+    <img src="{{ post_detail.photo.url }}" alt="" height="600">
+</div>
+
+{% endif %}
+
+<button><a href = {}></a>삭제</button>

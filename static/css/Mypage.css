@@ -1,0 +1,314 @@
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('./fonts/Pretendard-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Pretendard-ExtraBold';
+    src: url('./fonts/Pretendard-ExtraBold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Pretendard-Medium';
+    src: url('./fonts/Pretendard-Medium.woff') format('woff');
+}
+
+.blinking{
+    -webkit-animation:blink 0.8s ease-in-out infinite alternate;
+    -moz-animation:blink 0.8s ease-in-out infinite alternate;
+    animation:blink 0.8s ease-in-out infinite alternate;
+  }
+  @-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  @-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  @keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #FEFFFD;
+}
+body::-webkit-scrollbar{
+    display: none;
+}
+
+
+.nav{
+    width: 100%;
+    height: 80px;
+    background-color: #8DB596;
+    display: flex;
+    align-items: center;
+}
+.nav h1{
+    font-family: 'Black Han Sans';
+    color: #fff;
+    font-size: 35px;
+    line-height: 60px;
+    padding-left: 40px;
+    margin-top: 30px;
+}
+.nav #button{
+    position: absolute;
+    right: 40px;
+    display: flex;
+    align-items: center;
+}
+.nav a{
+    display: flex;
+    width: 120px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: #fff;
+    color: black;
+    text-decoration: none;
+    margin: 0 10px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'IBM Plex Sans';
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 31px;
+}
+.nav a:hover{
+    color: #fff;
+    background-color: #4D8262;
+    box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+#now {
+    color: #fff;
+    background-color: #4D8262;
+    box-shadow: inset 0px 4px 12px rgba(0, 0, 0, 0.25);
+}
+.content{
+    padding-top: 50px;
+}
+
+/* .Mypage-top{
+    position: relative;
+} */
+
+#mypage-image{
+    margin-left: 6%;
+    margin-top: 1.5vh;
+    /* position: absolute; */
+    width: 90px;
+    height: 90px;   
+    /* left: 102px;
+    top: 180px; */
+    margin-top: 40px;
+}
+
+.Mypage-title h1{
+    /* position: absolute;
+    float: left;
+    left: 26vh;
+    top: 0vh;
+    margin-left: 2%;
+    font-family: 'Pretendard-ExtraBold';
+    font-size: 64px; */
+
+    position: absolute;
+    left: 220px;
+    top: 162px;
+    font-family: 'Pretendard-ExtraBold';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 55px;
+    line-height: 70px;
+    margin: 0;
+}
+.Mypage-title p{
+    position: absolute;
+    left: 220px;
+    top: 210px;
+
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 27px;
+    line-height: 35px;
+
+    color: #89A95D;
+}
+
+h2{
+    font-family: 'Pretendard-Bold';
+    font-size: 30px;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+/* span{
+    color: #215cb4;
+} */
+
+hr{
+    margin-top: -25px;
+}
+
+.my-info{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 6%;
+    padding: 5vh;
+    width: 400px;
+    height: 530px;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    float: left;
+    text-align: center;
+}
+
+.my-reword{
+    position: absolute;
+    margin-left: 40%;
+    padding: 5vh;
+    width: 830px;
+    height: 530px;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+    top: 280px;
+}
+
+#info-email{
+    position: absolute;
+    font-family: 'Pretendard-Medium';
+    font-size: 25px;
+    color: #575757;
+    left: 15%;
+    top: 10%;
+}
+
+#info-id{
+    position: absolute;
+    font-family: 'Pretendard-Medium';
+    font-size: 25px;
+    color: #575757;
+    left: 15%;
+    top: 35%;
+}
+
+#info-email-detail{
+    position: absolute;
+    font-family: 'Pretendard-Medium';
+    font-size: 25px;
+    left: 30%;
+    top: 70%;
+}
+
+#info-id-detail{
+    position: absolute;
+    font-family: 'Pretendard-Medium';
+    font-size: 25px;
+    left: 25%;
+    top: 35%;
+}
+
+#reword-image{
+    width: 140px;
+    margin-left: 80px;
+    margin-top: 60px;
+}
+
+#reword-blink-image1{
+    position: absolute;
+    left: 25%;
+    top: 70%;
+    width: 70px;
+    height: 70px;
+}
+
+#reword-blink-image2{
+    position: absolute;
+    left: 10%;
+    top: 65%;
+    width: 70px;
+    height: 70px;
+    transform: rotate(270deg);
+}
+
+#reword-score{
+    position: absolute;
+    font-family: 'Pretendard-ExtraBold';
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 91px;
+    left: 40%;
+    top: 55%;
+    color: #FFA800;
+}
+
+#type-button{
+    position: absolute;
+    right: 27%;
+    top: 35%;
+    color:#FFA800;
+    outline: #FFA800 solid 3.5px;
+    font-family: 'IBM Plex Sans';
+    font-size: 25px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    padding: 7px 30px 7px 30px;
+    background: none;
+    cursor: pointer;
+}
+
+#rewordshop-button{
+    position: absolute;
+    right: 35%;
+    top: 82%;
+    color:#FFA800;
+    outline: #FFA800 solid 3.5px;
+    font-family: 'IBM Plex Sans';
+    font-size: 25px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    padding: 7px 30px 7px 30px;
+    background: none;
+    cursor: pointer;
+}
+
+.button-wrapper{
+    position: absolute;
+    bottom: 30px;
+    left: 27%;
+}
+
+#logout-button{
+    background-color: #A0CA8C;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 50px 10px 50px;
+    border-radius: 50px;
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 52px;
+    cursor: pointer;
+}
+
+#logout-button:hover{
+    box-shadow: inset 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+#type-button:hover, #rewordshop-button:hover{
+    background-color: #FFA800;
+    color: #ffffff;
+    outline-color: #FFA800;
+}

@@ -20,13 +20,26 @@ from django.urls import path,include
 from doeco_app import views
 from accounts import views as accounts_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
-    path('/', views.main),
+    path('', views.main),
     path('admin/', admin.site.urls),
     path('place/', views.Ecospots),
-    path('login/', accounts_views.login),
-    path('logout/', accounts_views.logout)
-    
-
+    path('login/', accounts_views.login, name='login'),
+    path('logout/', accounts_views.logout),
+    path('register/', accounts_views.signup, name='register'),
+    path('freehome/', views.freehome, name='freehome'),
+    path('freepostcreate/', views.freepostcreate, name='freepostcreate'),
+    path('freedetail/<int:post_id>', views.freedetail, name='freedetail'),
+    # 127.0.0.1:8000/detail/
+    path('new_freecomment/<int:post_id>', views.new_freecomment, name='new_freecomment'),
+    path('mypage/', views.Mypage, name="mypage"),
+    path('ecorank/', views.ecorank, name="ecorank"),
+    path('ecotip/', views.ecotip, name="ecotip"),
+    path('zeroshop/', views.zeroshop, name="zeroshop"),
+    path('ecospot/', views.ecospot, name="ecospot")
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
